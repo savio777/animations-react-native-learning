@@ -20,6 +20,19 @@ const App = () => {
   const [test, setTest] = useState(0);
 
   useEffect(() => {
+    if (test > 0) {
+      setTimeout(() => {
+        Animated.spring(ballY, {
+          toValue: 0,
+          bounciness: 10,
+        }).start();
+        Animated.spring(ballX, {
+          toValue: 0,
+          bounciness: 10,
+        }).start();
+      }, 200);
+    }
+
     setTimeout(() => {
       Animated.spring(ballY, {
         toValue: 400,
@@ -27,32 +40,15 @@ const App = () => {
         //useNativeDriver: true,
       }).start();
       Animated.timing(ballX, {
-        toValue: 150,
+        toValue: 50,
         duration: 1000,
       }).start();
-    }, 300);
-
+    }, 600);
     setTimeout(() => {
-      Animated.timing(ballY, {
-        toValue: 200,
-        duration: 1000,
+      Animated.decay(ballX, {
+        velocity: 1,
       }).start();
-      Animated.timing(ballX, {
-        toValue: 300,
-        duration: 1000,
-      }).start();
-    }, 1000);
-
-    setTimeout(() => {
-      Animated.spring(ballY, {
-        toValue: 0,
-        bounciness: 10,
-      }).start();
-      Animated.spring(ballX, {
-        toValue: 0,
-        bounciness: 10,
-      }).start();
-    }, 1500);
+    }, 1600);
   }, [test]);
 
   return (
